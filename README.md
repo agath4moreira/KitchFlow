@@ -7,10 +7,10 @@
 
 | | |
 |---|---|
-| 🔗 Repositório | https://github.com/agath4moreira/KitchFlow |
-| 🌐 Demonstração online | https://agath4moreira.github.io/KitchFlow/ |
-| 🎨 Protótipo (Figma) | https://www.figma.com/file/EKcmHKWHmS2H7nRAbHZqRr?node-id=0:1&locale=pt-br&type=design |
-| 📄 Licença | MIT |
+|  Repositório | https://github.com/agath4moreira/KitchFlow |
+|  Demonstração online | https://agath4moreira.github.io/KitchFlow/ |
+|  Protótipo (Figma) | https://www.figma.com/file/EKcmHKWHmS2H7nRAbHZqRr?node-id=0:1&locale=pt-br&type=design |
+|  Licença | MIT |
 
 ---
 
