@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KitchFlow — gestão integrada para cozinhas sob demanda.">
+  <title>KitchFlow | Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#inicio" aria-label="KitchFlow início">
+        <span class="brand-mark">KF</span><span class="brand-copy"><strong>kitchflow</strong><small>MANAGER</small></span>
+      </a>
+      <div class="unit-card"><strong>Dark Kitchen Central</strong><small>Unidade principal</small></div>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <button class="nav-link active" data-page="overview"><span>⌂</span>Visão geral</button>
+        <button class="nav-link" data-page="orders"><span>▤</span>Pedidos</button>
+        <button class="nav-link" data-page="stock"><span>▦</span>Estoque</button>
+        <button class="nav-link" data-page="production"><span>♨</span>Produção</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span>Operação online</div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumb">Operação <span>/</span> <strong id="breadcrumbPage">Visão geral</strong></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="Buscar pedido..." aria-label="Buscar pedido"></label>
+          <button class="avatar" title="Perfil da equipe">E</button>
+        </div>
+      </header>
+
+      <section class="page active" id="page-overview">
+        <div class="page-heading"><div><p class="eyebrow">PAINEL DA OPERAÇÃO</p><h1>Bom dia, equipe</h1><p>Resumo da operação da cozinha hoje</p></div><span class="date-pill" id="todayLabel"></span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span>Pedidos ativos</span><strong id="activeCount">08</strong><small>Em andamento</small><i class="stat-icon green">▤</i></article>
+          <article class="stat-card"><span>Em atraso</span><strong id="lateCount">02</strong><small>Atenção ao preparo</small><i class="stat-icon amber">◷</i></article>
+          <article class="stat-card"><span>Prontos</span><strong id="readyCount">03</strong><small>Para expedição</small><i class="stat-icon blue">✓</i></article>
+          <article class="stat-card"><span>Alertas de estoque</span><strong id="alertCount">02</strong><small>Repor insumos</small><i class="stat-icon red">!</i></article>
+        </div>
+        <div class="overview-grid">
+          <article class="panel order-panel"><div class="panel-heading"><div><h2>Fila de pedidos</h2><p>Acompanhe os pedidos recentes</p></div><button class="text-button" data-go="orders">Ver todos ↗</button></div>
+            <div class="table-wrap"><table><thead><tr><th>PEDIDO / ITENS</th><th>HORÁRIO</th><th>STATUS</th></tr></thead><tbody id="overviewOrders"></tbody></table></div>
+          </article>
+          <div class="right-stack">
+            <article class="panel"><div class="panel-heading"><div><h2>Estoque em atenção</h2><p>Insumos próximos do mínimo</p></div><button class="icon-button" data-go="stock" aria-label="Abrir estoque">↗</button></div><div class="attention-list" id="attentionList"></div></article>
+            <article class="workflow-card"><h2>Fluxo de trabalho</h2><div class="workflow-line"><span>Recebido</span><b>→</b><span>Preparando</span></div><div class="workflow-line"><span>Pronto</span><b>→</b><span>Expedido</span></div><small>Atualize as etapas na área de Produção.</small></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-orders">
+        <div class="page-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h1>Pedidos</h1><p>Gerencie os pedidos recebidos pelos canais de delivery</p></div><button class="primary-button" id="newOrderBtn">＋ Novo pedido</button></div>
+        <div class="toolbar"><div class="filter-tabs" id="orderFilters"><button class="selected" data-filter="Todos">Todos</button><button data-filter="Recebido">Recebidos</button><button data-filter="Preparando">Preparando</button><button data-filter="Pronto">Prontos</button><button data-filter="Expedido">Expedidos</button></div><span class="result-count" id="orderResultCount"></span></div>
+        <div class="panel table-panel"><div class="table-wrap"><table class="orders-table"><thead><tr><th>PEDIDO</th><th>ITENS</th><th>CANAL</th><th>HORÁRIO</th><th>STATUS</th><th>AÇÃO</th></tr></thead><tbody id="ordersTable"></tbody></table></div><div class="empty-state hidden" id="ordersEmpty">Nenhum pedido encontrado.</div></div>
+      </section>
+
+      <section class="page" id="page-stock">
+        <div class="page-heading"><div><p class="eyebrow">CONTROLE DE INSUMOS</p><h1>Estoque</h1><p>Acompanhe quantidades disponíveis e níveis mínimos</p></div><button class="primary-button" id="newStockBtn">＋ Adicionar insumo</button></div>
+        <div class="stock-summary"><article class="summary-card"><span>Insumos cadastrados</span><strong id="stockTotal">05</strong></article><article class="summary-card"><span>Precisam de reposição</span><strong id="stockLow">02</strong></article><article class="summary-card"><span>Estoque adequado</span><strong id="stockOk">03</strong></article></div>
+        <div class="panel table-panel"><div class="panel-heading"><div><h2>Insumos da cozinha</h2><p>Quantidade atual comparada ao estoque mínimo</p></div><span class="legend"><i></i>Estoque baixo</span></div><div class="table-wrap"><table><thead><tr><th>INSUMO</th><th>QUANTIDADE ATUAL</th><th>ESTOQUE MÍNIMO</th><th>SITUAÇÃO</th><th>AÇÃO</th></tr></thead><tbody id="stockTable"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-production">
+        <div class="page-heading"><div><p class="eyebrow">ACOMPANHAMENTO DO PREPARO</p><h1>Produção</h1><p>Visualize e avance os pedidos em cada etapa</p></div><span class="live-pill"><i></i>Atualizado em tempo real nesta tela</span></div>
+        <div class="kanban-board" id="kanbanBoard"></div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navegação mobile">
+    <button class="active" data-page="overview"><span>⌂</span>Início</button><button data-page="orders"><span>▤</span>Pedidos</button><button data-page="stock"><span>▦</span>Estoque</button><button data-page="production"><span>♨</span>Produção</button>
+  </nav>
+
+  <dialog id="orderDialog" class="app-dialog"><form id="orderForm"><div class="dialog-heading"><div><p class="eyebrow">NOVO REGISTRO</p><h2>Cadastrar pedido</h2></div><button type="button" class="close-dialog" data-close="orderDialog">×</button></div><label>Itens do pedido<input name="items" required placeholder="Ex.: 2 bowls de frango"></label><div class="form-row"><label>Canal<select name="channel"><option>Delivery</option><option>Retirada</option><option>Aplicativo próprio</option></select></label><label>Horário<input name="time" type="time" required></label></div><label>Observações<textarea name="notes" rows="2" placeholder="Opcional"></textarea></label><div class="dialog-actions"><button type="button" class="secondary-button" data-close="orderDialog">Cancelar</button><button class="primary-button" type="submit">Salvar pedido</button></div></form></dialog>
+
+  <dialog id="stockDialog" class="app-dialog"><form id="stockForm"><div class="dialog-heading"><div><p class="eyebrow">NOVO INSUMO</p><h2>Adicionar ao estoque</h2></div><button type="button" class="close-dialog" data-close="stockDialog">×</button></div><label>Nome do insumo<input name="name" required placeholder="Ex.: Queijo muçarela"></label><div class="form-row"><label>Quantidade atual<input name="quantity" type="number" min="0" step="0.1" required placeholder="0"></label><label>Unidade<input name="unit" required placeholder="kg, L, un."></label></div><label>Estoque mínimo<input name="minimum" type="number" min="0" step="0.1" required placeholder="0"></label><div class="dialog-actions"><button type="button" class="secondary-button" data-close="stockDialog">Cancelar</button><button class="primary-button" type="submit">Salvar insumo</button></div></form></dialog>
+
+  <dialog id="quantityDialog" class="app-dialog"><form id="quantityForm"><div class="dialog-heading"><div><p class="eyebrow">ATUALIZAÇÃO</p><h2>Atualizar quantidade</h2><p id="quantityItemName"></p></div><button type="button" class="close-dialog" data-close="quantityDialog">×</button></div><input type="hidden" name="id"><label>Nova quantidade<input name="quantity" type="number" min="0" step="0.1" required></label><div class="dialog-actions"><button type="button" class="secondary-button" data-close="quantityDialog">Cancelar</button><button class="primary-button" type="submit">Atualizar estoque</button></div></form></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
